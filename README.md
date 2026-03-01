@@ -1,4 +1,4 @@
-# 🛠️ Validador de CPF em Python
+# 🛠️ Validador de CPF em Python.
 
 Projeto desenvolvido para praticar lógica de programação utilizando Python.
 
