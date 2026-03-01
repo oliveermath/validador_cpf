@@ -1,0 +1,119 @@
+import os
+linha = ('-' * 40)
+
+while True:
+    print('----------------------------')
+    print('>  VAMOS VALIDAR SEU CPF?  <')
+    print('----------------------------')
+
+    # ETAPA 1 - ENTRADA 
+    cpf = input('> Digite seu CPF: ')
+
+    # ETAPA 2 - TRATAMENTO BASE 
+
+    if not cpf:
+        print('X - Erro: Não aceito CPF vazio. Tente novamente')
+        continue
+
+    # NOVO CPF COM TRATAMENTO FINAL 
+    cpf_tratado = cpf.replace('.', '').replace('-', '').replace(' ', '')
+
+    if not cpf_tratado.isdigit():
+        print('X - Erro: Não aceitamos letras. Tente novamente')
+        continue
+    
+    if len(cpf_tratado) != 11:
+        print('> Não aceitamos CPF maiores ou menores que 11 números.')
+        continue
+
+    if cpf_tratado == (cpf_tratado[0] * 11):
+        print('> X - Erro: Seu CPF tem números repetidos')
+        continue
+
+    print(f'> ;D Seu CPF finalizado e tratado com sucesso: {cpf_tratado}')
+    
+    # ETAPA 3 - CALCULO DIGITO 1
+
+    nove_digitos = cpf_tratado[:9]
+
+    contador = 10
+    resultado = 0
+    soma = 0
+
+    for numero in nove_digitos:
+        digito_um = int(numero)
+
+        resultado = digito_um * contador
+
+        contador -= 1
+
+        soma += resultado
+
+    print(linha)
+
+    resultado_final_um = (soma * 10) % 11
+    print(f'> O resultado final do seu primeiro digito é: {resultado_final_um}')
+
+    if resultado_final_um > 9:
+        digito_um_verificado = 0
+    else:
+        digito_um_verificado = resultado_final_um
+
+    if digito_um_verificado != int(cpf_tratado[9]):
+        print('> X - Erro: O digito 1 é diferente do seu CPF')
+        break
+    else:
+        print(f'> O digito 1, é valido com o do seu CPF: {digito_um_verificado} == {cpf_tratado[9]}')
+
+    # ETAPA 4 - CALCULO DO DIGITO 2 
+
+    dez_digitos = nove_digitos + str(digito_um_verificado)
+    contador = 11
+    soma = 0
+    resultado = 0
+
+    for numero in dez_digitos:
+        digito_dois = int(numero)
+
+        resultado = digito_dois * contador
+
+        contador -= 1
+
+        soma += resultado
+
+    print(linha)
+
+    resultado_final_dois = (soma * 10) % 11
+    print(f'> O resultado final do seu segundo digito é: {resultado_final_dois}')
+
+    if resultado_final_dois > 9:
+        digito_dois_verificado = 0
+    else:
+        digito_dois_verificado = resultado_final_dois
+
+    
+    if digito_dois_verificado != int(cpf_tratado[10]):
+        print('> X - Erro: O digito 2 é diferente do seu CPF')
+        break
+    else:
+        print(f'> O digito 2, é valido com o do seu CPF: {digito_dois_verificado} == {cpf_tratado[10]}')
+
+    print(linha)
+
+    # ETAPA 5 - RESULTADO FINAL
+    if digito_um_verificado == int(cpf_tratado[9]) and digito_dois_verificado == int(cpf_tratado[10]):
+
+        os.system('cls')
+        print(linha)
+        print('>> ----     ** PARABÉNS! **     --- <<')
+        print(linha)
+        print('>> Seu CPF foi validado com SUCESSO! ✅ <<')
+
+        print(linha)
+        continuar = input('> Deseja validar outro CPF?: ').lower().strip()
+        
+        if continuar in ('n', 'não', 'nao'):
+            print('> Encerrando nosso validador de CPF... \n' \
+            'Até logo, e obrigado pela preferência! :D')
+            break
+
