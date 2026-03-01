@@ -14,7 +14,7 @@ Este projeto foi desenvolvido para aprimorar aprimorar o raciocínio lógico uti
 - Tratamento e limpeza da entrada
 - Estrutura de repetição (for)
 - Estruturas condicionais
-- 
+  
 ## 💾 Tecnologias utilizadas
 - Python 3 
   
